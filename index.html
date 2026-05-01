@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bespoke Auto Care — Beyond Factory Perfection.">
+  <title>Bespoke Auto Care</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div id="cursor"></div>
+
+  <!-- Preload Overlay -->
+  <div id="preload-overlay">
+    <div id="preload-counter"><span id="pct">0</span><span class="pct-sign">%</span></div>
+    <div id="preload-label">Loading sequence</div>
+  </div>
+
+  <!-- Fixed Progress Bar -->
+  <div id="progress-bar"></div>
+
+  <!-- Mobile Fallback -->
+  <div id="mobile-hero">
+    <img src="assets/scroll-sequence/Sequence 01000.jpg" alt="Bespoke Auto Care">
+    <div class="mobile-text">
+      <p class="sublabel">Bespoke Auto Care</p>
+      <h1 class="headline">Beyond<br>Factory<br>Perfection.</h1>
+    </div>
+  </div>
+
+  <!-- Scroll Sequence Section -->
+  <div id="scroll-wrapper">
+    <div id="sticky-container">
+      <canvas id="hero-canvas"></canvas>
+      <div id="vignette"></div>
+      <div id="hero-text">
+        <p class="sublabel">Bespoke Auto Care</p>
+        <h1 class="headline">
+          <span class="headline-reveal">Beyond Factory Perfection.</span>
+        </h1>
+        <div id="scroll-hint">
+          <div class="hint-line"></div>
+          <svg class="hint-chevron" width="12" height="8" viewBox="0 0 12 8" fill="none">
+            <path d="M1 1L6 6L11 1" stroke="white" stroke-width="1" stroke-linecap="square"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Services Section -->
+  <section id="stats-section">
+
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="section-eyebrow">Signature Services</span>
+        <h2 class="section-display">What We<br>Do Best</h2>
+      </div>
+      <p class="section-intro">Every vehicle that enters our workshop receives<br>undivided attention, premium materials,<br>and flawless execution.</p>
+    </div>
+
+    <div class="stats-inner">
+
+      <div class="stat-block service-paint">
+        <span class="block-num">01</span>
+        <div class="block-accent-line"></div>
+        <div class="stat-block-content">
+          <span class="service-tag">Paint Care</span>
+          <h3 class="service-name">Paint<br>Correction</h3>
+          <p class="service-desc">Multi-stage machine polishing eliminates swirl marks, scratches, and oxidation. Every panel restored to a deep mirror finish.</p>
+          <a class="service-cta" href="#">Book a consultation →</a>
+        </div>
+      </div>
+
+      <div class="stat-block service-ceramic">
+        <span class="block-num">02</span>
+        <div class="block-accent-line"></div>
+        <div class="stat-block-content">
+          <span class="service-tag">Protection</span>
+          <h3 class="service-name">Ceramic<br>Coating</h3>
+          <p class="service-desc">Nano-ceramic protection permanently bonded to the surface. Hydrophobic, UV-resistant, and self-cleaning for years.</p>
+          <a class="service-cta" href="#">Book a consultation →</a>
+        </div>
+      </div>
+
+      <div class="stat-block service-wraps">
+        <span class="block-num">03</span>
+        <div class="block-accent-line"></div>
+        <div class="stat-block-content">
+          <span class="service-tag">Customisation</span>
+          <h3 class="service-name">Bespoke<br>Wraps</h3>
+          <p class="service-desc">Full and partial vehicle wraps in premium matte, satin, gloss, or colour-shift films. Fully reversible. Fully yours.</p>
+          <a class="service-cta" href="#">Book a consultation →</a>
+        </div>
+      </div>
+
+      <div class="stat-block service-tuning">
+        <span class="block-num">04</span>
+        <div class="block-accent-line"></div>
+        <div class="stat-block-content">
+          <span class="service-tag">Performance</span>
+          <h3 class="service-name">Performance<br>Tuning</h3>
+          <p class="service-desc">ECU remapping, suspension geometry calibration, and brake upgrades engineered for track-day precision.</p>
+          <a class="service-cta" href="#">Book a consultation →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="stats-footer">
+      <span class="stats-footer-label">Bespoke Auto Care · Est. 2024 · By Appointment Only</span>
+      <span class="stats-footer-label">All services carried out in-house · No subcontracting</span>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
