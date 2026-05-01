@@ -58,11 +58,6 @@
   var lastTs       = 0;
   var dpr          = 1;
 
-  // ── Mobile check — skip canvas init on small screens ──
-  if (window.innerWidth < MOBILE_BP) {
-    overlay.classList.add('hidden');
-    return;
-  }
 
   // ── Image path builder ─────────────────────────────────
   function framePath(i) {
@@ -79,8 +74,8 @@
 
   // ── Scroll wrapper height ──────────────────────────────
   function setWrapperHeight() {
-    var scrollDistance = TOTAL_FRAMES * 6;
-    scrollWrapper.style.height = (window.innerHeight + scrollDistance) + 'px';
+    var px = window.innerWidth < MOBILE_BP ? 4 : 6;
+    scrollWrapper.style.height = (window.innerHeight + TOTAL_FRAMES * px) + 'px';
   }
 
   // ── Object-fit cover draw ──────────────────────────────
