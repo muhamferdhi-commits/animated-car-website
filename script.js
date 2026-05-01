@@ -9,6 +9,11 @@
   var FRAME_MS     = 1000 / FPS_CAP;
   var MOBILE_BP    = 768;
 
+  // On mobile load every 3rd frame (~110 frames, ~40MB) for fast load
+  var isMobile     = window.innerWidth < MOBILE_BP;
+  var FRAME_STEP   = isMobile ? 3 : 1;
+  var FRAME_COUNT  = Math.ceil(TOTAL_FRAMES / FRAME_STEP);
+
   // ── DOM refs ───────────────────────────────────────────
   var overlay       = document.getElementById('preload-overlay');
   var pctEl         = document.getElementById('pct');
@@ -29,7 +34,6 @@
     my = e.clientY;
   });
 
-  // Halo on interactive elements
   var hoverTargets = document.querySelectorAll('a, button, .stat-block');
   for (var h = 0; h < hoverTargets.length; h++) {
     hoverTargets[h].addEventListener('mouseenter', function () {
@@ -40,7 +44,6 @@
     });
   }
 
-  // Cursor RAF — runs independently of canvas
   function tickCursor() {
     requestAnimationFrame(tickCursor);
     cx += (mx - cx) * 0.18;
@@ -50,7 +53,7 @@
   tickCursor();
 
   // ── State ──────────────────────────────────────────────
-  var images       = new Array(TOTAL_FRAMES);
+  var images       = new Array(FRAME_COUNT);
   var currentFrame = 0;
   var targetFrame  = 0;
   var isLoaded     = false;
@@ -58,10 +61,10 @@
   var lastTs       = 0;
   var dpr          = 1;
 
-
   // ── Image path builder ─────────────────────────────────
+  // i = logical index (0..FRAME_COUNT-1), maps to actual frame via FRAME_STEP
   function framePath(i) {
-    var n = String(FIRST_FRAME + i).padStart(5, '0');
+    var n = String(FIRST_FRAME + i * FRAME_STEP).padStart(5, '0');
     return 'assets/scroll-sequence/Sequence ' + n + '.jpg';
   }
 
@@ -74,7 +77,7 @@
 
   // ── Scroll wrapper height ──────────────────────────────
   function setWrapperHeight() {
-    var px = window.innerWidth < MOBILE_BP ? 4 : 6;
+    var px = isMobile ? 4 : 6;
     scrollWrapper.style.height = (window.innerHeight + TOTAL_FRAMES * px) + 'px';
   }
 
@@ -130,7 +133,7 @@
     var scrolled    = -rect.top;
     var progress    = Math.max(0, Math.min(1, scrolled / totalScroll));
 
-    targetFrame = progress * (TOTAL_FRAMES - 1);
+    targetFrame = progress * (FRAME_COUNT - 1);
     progressBar.style.width = (progress * 100) + '%';
   }
 
@@ -147,7 +150,7 @@
     currentFrame += (targetFrame - currentFrame) * LERP_FACTOR;
 
     var idx = Math.round(currentFrame);
-    idx = Math.max(0, Math.min(TOTAL_FRAMES - 1, idx));
+    idx = Math.max(0, Math.min(FRAME_COUNT - 1, idx));
 
     var img = images[idx];
     if (img && img.complete && img.naturalWidth > 0) {
@@ -161,14 +164,13 @@
 
     function onImageLoad() {
       loaded++;
-      var pct = Math.floor((loaded / TOTAL_FRAMES) * 100);
+      var pct = Math.floor((loaded / FRAME_COUNT) * 100);
       pctEl.textContent = pct;
 
-      if (loaded === TOTAL_FRAMES) {
+      if (loaded === FRAME_COUNT) {
         pctEl.textContent = '100';
         setTimeout(function () {
           overlay.classList.add('hidden');
-          // Reveal headline as the overlay fades out
           setTimeout(revealHeadline, 250);
           setTimeout(function () {
             isLoaded = true;
@@ -177,7 +179,7 @@
       }
     }
 
-    for (var i = 0; i < TOTAL_FRAMES; i++) {
+    for (var i = 0; i < FRAME_COUNT; i++) {
       (function (index) {
         var img = new Image();
         img.onload  = onImageLoad;
@@ -193,7 +195,6 @@
   function onResize() {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(function () {
-      if (window.innerWidth < MOBILE_BP) return;
       resizeCanvas();
       setWrapperHeight();
       onScroll();

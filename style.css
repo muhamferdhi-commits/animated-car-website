@@ -490,34 +490,37 @@ body {
 /* ─── Responsive ──────────────────────────────────────── */
 
 @media (max-width: 767px) {
-  /* Always hide the static fallback — canvas runs on mobile now */
+  /* Hide the static fallback — canvas runs on mobile */
   #mobile-hero {
     display: none;
   }
 
-  /* Hero text — tighter for portrait screens */
+  /* ── Hero ── */
+
+  /* Center text vertically so it never overflows the screen */
+  #hero-text {
+    justify-content: center;
+    padding: 0 1.6rem;
+    text-align: center;
+  }
+
   .headline {
-    font-size: clamp(1.8rem, 9vw, 3rem);
-    letter-spacing: 0.04em;
+    font-size: clamp(1.6rem, 8vw, 2.6rem);
+    letter-spacing: 0.05em;
+    line-height: 1.1;
   }
 
   .sublabel {
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    margin-bottom: 0.9rem;
-  }
-
-  #hero-text {
-    padding: 0 1.4rem;
-    justify-content: flex-end;
-    padding-bottom: 5rem;
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    margin-bottom: 1rem;
   }
 
   #scroll-hint {
-    bottom: 1.8rem;
+    bottom: 1.5rem;
   }
 
-  /* Services section */
+  /* ── Services section ── */
   #stats-section {
     padding: 3.5rem 5% 3.5rem;
   }
@@ -542,19 +545,19 @@ body {
   }
 
   .stat-block {
-    min-height: 300px;
+    min-height: 280px;
+  }
+
+  .service-name {
+    font-size: 1.8rem;
+  }
+
+  .stat-block-content {
+    padding: 1.8rem 1.6rem 2rem;
   }
 
   .block-accent-line {
     width: 40%;
-  }
-
-  .service-name {
-    font-size: 1.9rem;
-  }
-
-  .stat-block-content {
-    padding: 2rem 1.6rem 2.2rem;
   }
 
   .stats-footer {
